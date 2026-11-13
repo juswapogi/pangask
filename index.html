@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special Delivery for Eiriel! 🐾 | Peanuts Sunday Edition</title>
+  
+  <!-- Google Fonts: Authentic Peanuts comic lettering + warm readable body font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,700;1,700&family=Nunito:wght@600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FDFBF7',
+            paperDark: '#F5EFE2',
+            ink: '#1A1A1A',
+            snoopyRed: '#D9381E',
+            snoopyRedDark: '#B32812',
+            charlieYellow: '#F4C430',
+            woodstockGold: '#FFD700',
+            skyTint: '#EBF5FB',
+          },
+          fontFamily: {
+            comic: ['"Patrick Hand"', '"Comic Neue"', 'cursive'],
+            comicBold: ['"Comic Neue"', '"Patrick Hand"', 'cursive'],
+            body: ['"Nunito"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Classic Newsprint Halftone & Warm Cream Paper Texture */
+    body {
+      background-color: #F4EFE6;
+      background-image: radial-gradient(#1A1A1A14 1px, transparent 1px);
+      background-size: 16px 16px;
+      color: #1A1A1A;
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Crisp Comic Panel Borders & Offset Shadows */
+    .comic-panel {
+      background-color: #FDFBF7;
+      border: 3.5px solid #1A1A1A;
+      box-shadow: 7px 7px 0px #1A1A1A;
+      border-radius: 14px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .comic-panel-sm {
+      background-color: #FDFBF7;
+      border: 3px solid #1A1A1A;
+      box-shadow: 4px 4px 0px #1A1A1A;
+      border-radius: 12px;
+    }
+
+    /* Chunky Comic Buttons */
+    .comic-btn {
+      border: 3px solid #1A1A1A;
+      box-shadow: 4px 4px 0px #1A1A1A;
+      border-radius: 14px;
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease, background-color 0.15s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .comic-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #1A1A1A;
+    }
+
+    .comic-btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0px #1A1A1A;
+    }
+
+    /* Speech Bubble Tail */
+    .speech-bubble {
+      position: relative;
+      background: #FFFFFF;
+      border: 3px solid #1A1A1A;
+      border-radius: 22px;
+      box-shadow: 4px 4px 0px #1A1A1A;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 34px;
+      border-width: 16px 14px 0 0;
+      border-style: solid;
+      border-color: #1A1A1A transparent transparent transparent;
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 37px;
+      border-width: 12px 10px 0 0;
+      border-style: solid;
+      border-color: #FFFFFF transparent transparent transparent;
+      z-index: 1;
+    }
+
+    /* Vintage Ticket Perforation */
+    .ticket-divider {
+      border-top: 3px dashed #1A1A1A;
+      position: relative;
+    }
+
+    /* Animations */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(3deg); }
+    }
+
+    @keyframes woodstockFlutter {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-5px) rotate(5deg); }
+    }
+
+    @keyframes happyDance {
+      0%, 100% { transform: translateY(0px) rotate(-3deg) scale(1); }
+      25% { transform: translateY(-14px) rotate(4deg) scale(1.03); }
+      50% { transform: translateY(0px) rotate(3deg) scale(0.98); }
+      75% { transform: translateY(-12px) rotate(-5deg) scale(1.03); }
+    }
+
+    @keyframes noteFloat {
+      0% { opacity: 0; transform: translateY(8px) scale(0.8); }
+      50% { opacity: 1; transform: translateY(-8px) scale(1.05); }
+      100% { opacity: 0; transform: translateY(-22px) scale(0.9); }
+    }
+
+    @keyframes panelPop {
+      0% { opacity: 0; transform: scale(0.94) translateY(16px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .animate-float {
+      animation: floatSlow 3.2s ease-in-out infinite;
+    }
+
+    .animate-float-1 {
+      animation: floatSlow 3s ease-in-out infinite;
+    }
+
+    .animate-float-2 {
+      animation: floatSlow 3s ease-in-out 1.1s infinite;
+    }
+
+    .animate-woodstock {
+      animation: woodstockFlutter 1.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .animate-happy-dance {
+      animation: happyDance 0.85s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    .animate-note-1 {
+      animation: noteFloat 2.2s ease-in-out infinite;
+    }
+
+    .animate-note-2 {
+      animation: noteFloat 2.2s ease-in-out 0.9s infinite;
+    }
+
+    .animate-panel-pop {
+      animation: panelPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-5 px-3 sm:px-6 md:py-8">
+
+  <!-- Confetti Layer -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Main Sunday Comic Strip Container -->
+  <main class="max-w-3xl mx-auto space-y-6">
+
+    <!-- ==================== SUNDAY COMIC MASTHEAD ==================== -->
+    <header class="comic-panel overflow-hidden">
+      <div class="bg-charlieYellow px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-2 border-b-[3.5px] border-ink">
+        <div class="flex items-center gap-2">
+          <span class="inline-block bg-ink text-charlieYellow font-comicBold text-xs sm:text-sm px-2.5 py-0.5 rounded-full tracking-wider uppercase">
+            Sunday Special
+          </span>
+          <span class="font-comic text-base sm:text-lg text-ink font-bold">
+            THE PEANUTS DISPATCH
+          </span>
+        </div>
+        <div class="font-comic text-sm sm:text-base text-ink font-bold">
+          NOV. 29, 2026 • CHINATOWN EDITION
+        </div>
+      </div>
+
+      <!-- Charlie Brown Signature Zig-Zag Banner -->
+      <div class="bg-paper px-4 py-2.5 flex items-center justify-between gap-3">
+        <span class="font-comic text-sm sm:text-base tracking-wide text-ink/80">
+          ★ Featuring Snoopy &amp; Woodstock ★
+        </span>
+        <svg class="h-4 w-32 sm:w-48 flex-shrink-0" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0 15 L16.6 4 L33.3 15 L50 4 L66.6 15 L83.3 4 L100 15 L116.6 4 L133.3 15 L150 4 L166.6 15 L183.3 4 L200 15" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="font-comic text-sm sm:text-base font-bold text-snoopyRed">
+          FOR EIRIEL!
+        </span>
+      </div>
+    </header>
+
+    <!-- ==================== PANEL 1: HERO & SNOOPY ON DOGHOUSE ==================== -->
+    <section id="hero-panel" class="comic-panel p-5 sm:p-8 relative overflow-hidden">
+      <!-- Panel Number Tag -->
+      <div class="absolute top-3 left-3 bg-charlieYellow border-2 border-ink rounded-lg px-2.5 py-0.5 font-comicBold text-xs sm:text-sm shadow-[2px_2px_0px_#1A1A1A]">
+        PANEL 1
+      </div>
+
+      <!-- Decorative Floating Comic Star -->
+      <div class="hidden sm:block absolute top-5 right-6 animate-float" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="#F4C430" stroke="#1A1A1A" stroke-width="2.2" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+        
+        <!-- Left/Top: Bespoke Snoopy on Red Doghouse + Woodstock -->
+        <div class="md:col-span-6 flex flex-col items-center">
+          <!-- Speech Bubble -->
+          <div class="speech-bubble px-4 py-2.5 mb-4 max-w-[270px] text-center">
+            <p class="font-comic text-lg sm:text-xl leading-snug text-ink">
+              "Psst... special delivery for <span class="text-snoopyRed font-bold underline decoration-wavy decoration-charlieYellow">Eiriel Natalie</span>!"
+            </p>
+          </div>
+
+          <!-- Illustration Wrapper (Renders s-l400.png directly + Celebration Overlay on Yes!) -->
+          <div id="snoopy-stage" class="w-full max-w-[295px] flex justify-center relative">
+            <div id="snoopy-frame" class="relative w-full rounded-2xl border-[3px] border-[#1A1A1A] bg-[#B9F3FF] shadow-[5px_5px_0px_#1A1A1A] overflow-hidden transition-transform duration-300">
+              
+              <!-- Peaceful Floating Zzzs (Visible before RSVP Yes) -->
+              <div id="snoopy-zzz" class="absolute top-3 left-3.5 z-10 pointer-events-none select-none font-comicBold text-ink/80 text-base sm:text-lg animate-float">
+                z Z z ...
+              </div>
+
+              <!-- Joyful Celebration Overlay (Revealed when Eiriel clicks Yes!) -->
+              <div id="snoopy-celebration-overlay" class="hidden absolute inset-0 z-10 pointer-events-none select-none">
+                <span class="animate-note-1 absolute top-3 left-4 font-comicBold text-2xl sm:text-3xl text-snoopyRed drop-shadow-[1px_1px_0px_#1A1A1A]">♪</span>
+                <span class="animate-note-2 absolute top-4 right-5 font-comicBold text-2xl sm:text-3xl text-charlieYellow drop-shadow-[1px_1px_0px_#1A1A1A]">♫</span>
+                <span class="animate-float-1 absolute top-11 left-6 font-comicBold text-xl sm:text-2xl text-charlieYellow drop-shadow-[1px_1px_0px_#1A1A1A]">★</span>
+                <span class="animate-float-2 absolute top-12 right-7 font-comicBold text-xl sm:text-2xl text-snoopyRed drop-shadow-[1px_1px_0px_#1A1A1A]">★</span>
+              </div>
+
+              <!-- Provided Snoopy & Woodstock Comic Photo -->
+              <img
+                id="snoopy-photo"
+                src="s-l400.png"
+                alt="Snoopy and Woodstock on the red doghouse"
+                class="w-full h-auto max-h-[340px] object-contain block mx-auto"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Right/Bottom: Headline & Heartfelt Note -->
+        <div class="md:col-span-6 text-center md:text-left space-y-4">
+          <div class="inline-flex items-center gap-1.5 bg-snoopyRed text-white font-comicBold text-xs sm:text-sm px-3 py-1 rounded-full border-2 border-ink shadow-[2px_2px_0px_#1A1A1A]">
+            <span>OFFICIAL INVITATION</span>
+          </div>
+
+          <h1 id="main-headline" class="font-comic text-3xl sm:text-4xl md:text-[2.6rem] leading-[1.15] text-ink font-bold">
+            Hi Eiriel! Are you free for an <span class="text-snoopyRed underline decoration-charlieYellow decoration-4 underline-offset-4">Encouragement Date?</span>
+          </h1>
+
+          <p id="sub-headline" class="font-body text-base sm:text-lg text-ink/85 leading-relaxed font-semibold">
+            Dontchu think you deserve a well-earned break from acads, mainit-init na dimsum, matcha!! And a good pictorial pang-IG? BWAHAHAHAHAHA. Snoopy &amp; Woodstock already saved you a spot!
+          </p>
+
+          <!-- Cute Paw Print Divider -->
+          <div class="pt-1 flex items-center justify-center md:justify-start gap-3 text-ink/70" aria-hidden="true">
+            <span class="text-lg">🐾</span>
+            <span class="h-[2.5px] w-16 bg-ink rounded-full"></span>
+            <span class="text-lg">🐾</span>
+            <span class="h-[2.5px] w-16 bg-ink rounded-full"></span>
+            <span class="text-lg">🐾</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PANEL 2: THE ITINERARY TICKET CARD ==================== -->
+    <section class="comic-panel overflow-hidden relative">
+      <!-- Panel Tag -->
+      <div class="bg-ink text-paper px-4 py-2.5 flex items-center justify-between">
+        <span class="font-comicBold text-xs sm:text-sm tracking-wider uppercase text-charlieYellow">
+          PANEL 2 • THE ITINERARY TICKET
+        </span>
+        <span class="font-comic text-sm text-paper/90">
+          ADMIT ONE: EIRIEL ★
+        </span>
+      </div>
+
+      <!-- Vintage Ticket Body -->
+      <div class="p-5 sm:p-7 bg-[#FFFDF8]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <!-- Detail 1: Date -->
+          <div class="comic-panel-sm p-4 bg-paperDark/60 flex items-start gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-charlieYellow border-2 border-ink flex items-center justify-center p-1.5 flex-shrink-0 shadow-[2px_2px_0px_#1A1A1A]">
+              <img
+                src="calendar.png"
+                alt="Calendar"
+                class="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <p class="font-comicBold text-xs uppercase tracking-wider text-snoopyRed">When</p>
+              <p class="font-comic text-xl sm:text-2xl font-bold text-ink leading-tight">
+                Sunday, November 29, 2026
+              </p>
+            </div>
+          </div>
+
+          <!-- Detail 2: Time -->
+          <div class="comic-panel-sm p-4 bg-paperDark/60 flex items-start gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-woodstockGold border-2 border-ink flex items-center justify-center p-1.5 flex-shrink-0 shadow-[2px_2px_0px_#1A1A1A]">
+              <img
+                src="clock.png"
+                alt="Clock"
+                class="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <p class="font-comicBold text-xs uppercase tracking-wider text-snoopyRed">Time</p>
+              <p class="font-comic text-xl sm:text-2xl font-bold text-ink leading-tight">
+                3:00 PM
+              </p>
+              <p class="font-body text-xs font-bold text-ink/65">Mahuli manglilibre ah NYAHAHAHA</p>
+            </div>
+          </div>
+
+          <!-- Detail 3: Location -->
+          <div class="comic-panel-sm p-4 bg-paperDark/60 flex items-start gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-white border-2 border-ink flex items-center justify-center p-1.5 flex-shrink-0 shadow-[2px_2px_0px_#1A1A1A]">
+              <img
+                src="lamp.png"
+                alt="Lanterns"
+                class="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <p class="font-comicBold text-xs uppercase tracking-wider text-snoopyRed">Where</p>
+              <p class="font-comic text-xl sm:text-2xl font-bold text-ink leading-tight">
+                Binondo, Manila
+              </p>
+              <p class="font-body text-xs font-bold text-ink/65">Fun fact: Binondo is the oldest Chinatown in the world!! It was established in 1594 by Spanish colonial authorities.</p>
+            </div>
+          </div>
+
+          <!-- Detail 4: What to bring -->
+          <div class="comic-panel-sm p-4 bg-paperDark/60 flex items-start gap-3.5">
+            <div class="w-12 h-12 rounded-xl bg-white border-2 border-ink flex items-center justify-center p-1.5 flex-shrink-0 shadow-[2px_2px_0px_#1A1A1A]">
+              <img
+                src="pencil.png"
+                alt="Pencil"
+                class="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <p class="font-comicBold text-xs uppercase tracking-wider text-snoopyRed">What to bring?</p>
+              <p class="font-comic text-lg sm:text-base font-bold text-ink leading-snug">
+                Payong, Pamaypay, Pamunas, Water, and yourself! (and maybe a little extra cash for dimsum and hopia) ˵ᗜ⩊ᗜ˵
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Ticket Bottom Stub Strip -->
+        <div class="mt-5 pt-4 ticket-divider flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-comicBold text-ink/75">
+          <span>NO. 1129-2026-EIRIEL</span>
+          <span>★ 100% STRESS-FREE GUARANTEE ★</span>
+          <span>SNOOPY APPROVED 🐾</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PANEL 3: INTERACTIVE RSVP SECTION ==================== -->
+    <section id="rsvp-panel" class="comic-panel p-5 sm:p-8 text-center relative overflow-hidden">
+      <div class="inline-block bg-charlieYellow border-2 border-ink rounded-lg px-2.5 py-0.5 font-comicBold text-xs sm:text-sm shadow-[2px_2px_0px_#1A1A1A] mb-3">
+        PANEL 3 • YOUR TURN, EIRIEL!
+      </div>
+
+      <h2 class="font-comic text-2xl sm:text-3xl font-bold text-ink mb-2">
+        So, what do you say?
+      </h2>
+      <p id="woodstock-hint" class="font-comic text-lg sm:text-xl text-snoopyRed font-bold min-h-[28px] mb-6 transition-all">
+        Woodstock is waiting by the mailbox...
+      </p>
+
+      <!-- Interactive Button Arena -->
+      <div id="rsvp-arena" class="relative min-h-[130px] sm:min-h-[100px] flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-2">
+        <!-- Primary YES Button -->
+        <button
+          id="yes-btn"
+          type="button"
+          class="comic-btn bg-snoopyRed hover:bg-snoopyRedDark text-white font-comic text-2xl sm:text-3xl font-bold px-8 py-4 cursor-pointer z-10 active:scale-95"
+        >
+          Yes, I'm in! 🐾
+        </button>
+
+        <!-- Playful Dodging NO / Think Button -->
+        <button
+          id="no-btn"
+          type="button"
+          class="comic-btn bg-white hover:bg-paperDark text-ink font-comic text-lg sm:text-xl font-bold px-5 py-3.5 cursor-pointer z-20"
+        >
+          Teka, pagisipan ko muna...
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== PANEL 4: CELEBRATION & CONFIRMED PASS (HIDDEN UNTIL YES) ==================== -->
+    <section id="celebration-panel" class="hidden comic-panel overflow-hidden animate-panel-pop">
+      <!-- Celebration Banner -->
+      <div class="bg-snoopyRed text-white px-5 py-4 border-b-[3.5px] border-ink flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5">
+          <h2 class="font-comic text-2xl sm:text-3xl font-bold tracking-wide">
+            YAY! SEE YOU THERE, EIRIEL!
+          </h2>
+        </div>
+        <span class="bg-charlieYellow text-ink font-comicBold text-xs sm:text-sm px-3 py-1 rounded-full border-2 border-ink">
+          CONFIRMED ✓
+        </span>
+      </div>
+
+      <div class="p-5 sm:p-8 space-y-6 bg-[#FFFDF8]">
+        <!-- Joyful Message with Charlie Brown & Joe Cool Snoopy -->
+        <div class="bg-charlieYellow/35 border-2 border-ink rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+          <img
+            src="hockey-goalie-training-charliebrown-snoopy-goalie-mask.png"
+            alt="Charlie Brown and Snoopy"
+            class="w-24 sm:w-28 h-auto object-contain flex-shrink-0 rounded-xl bg-white border-2 border-ink p-1.5 shadow-[3px_3px_0px_#1A1A1A]"
+          />
+          <div>
+            <p class="font-comic text-xl sm:text-2xl font-bold text-ink">
+              Snoopy is officially doing his Happy Dance!
+            </p>
+            <p class="font-body text-sm sm:text-base font-semibold text-ink/80 mt-0.5">
+              Screenshot your Official E-Date Pass below or save it directly to your calendar so you're all set for the Binondo Encouragement Date!
+            </p>
+          </div>
+        </div>
+
+        <!-- Official Confirmed Date Pass -->
+        <div class="border-[3.5px] border-ink rounded-2xl bg-paper shadow-[6px_6px_0px_#1A1A1A] overflow-hidden">
+          <div class="bg-charlieYellow px-5 py-3 border-b-[3px] border-ink flex items-center justify-between">
+            <span class="font-comicBold text-sm sm:text-base uppercase tracking-wider text-ink">
+              OFFICIAL CONFIRMED DATE PASS
+            </span>
+            <span class="font-comicBold text-xs sm:text-sm bg-white px-2.5 py-0.5 rounded-md border-2 border-ink">
+              VIP GUEST: EIRIEL
+            </span>
+          </div>
+
+          <div class="p-5 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <!-- Pass Details -->
+            <div class="md:col-span-5 space-y-3">
+              <div>
+                <span class="text-xs font-comicBold uppercase text-snoopyRed tracking-wider">Event</span>
+                <p class="font-comic text-2xl font-bold text-ink">Encouragement Date</p>
+              </div>
+              <div class="grid grid-cols-2 gap-3 pt-1">
+                <div>
+                  <span class="text-xs font-comicBold uppercase text-snoopyRed tracking-wider">Date</span>
+                  <p class="font-comic text-lg sm:text-xl font-bold text-ink">Nov. 29, 2026</p>
+                </div>
+                <div>
+                  <span class="text-xs font-comicBold uppercase text-snoopyRed tracking-wider">Time</span>
+                  <p class="font-comic text-lg sm:text-xl font-bold text-ink">3:00 PM</p>
+                </div>
+              </div>
+              <div class="pt-1">
+                <span class="text-xs font-comicBold uppercase text-snoopyRed tracking-wider">Destination</span>
+                <p class="font-comic text-xl font-bold text-ink">Binondo Church, Manila</p>
+              </div>
+            </div>
+
+            <!-- Google Map Showing Binondo Church -->
+            <div class="md:col-span-7 bg-white border-2 border-ink rounded-xl p-3 shadow-[3px_3px_0px_#1A1A1A] space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <p class="font-comicBold text-xs sm:text-sm uppercase tracking-wider text-ink flex items-center gap-1.5">
+                  <span>📍</span>
+                  <span>Meeting Spot: Binondo Church</span>
+                </p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Binondo+Church+Plaza+Lorenzo+Ruiz+Manila"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-comicBold text-xs text-snoopyRed underline hover:text-snoopyRedDark"
+                >
+                  Open Maps ↗
+                </a>
+              </div>
+              <div class="w-full h-48 sm:h-52 rounded-lg overflow-hidden border-2 border-ink">
+                <iframe
+                  title="Google Map showing Binondo Church, Manila"
+                  src="https://www.google.com/maps?q=Binondo+Church,+Plaza+Lorenzo+Ruiz,+Binondo,+Manila&output=embed"
+                  class="w-full h-full border-0"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pass Action Footer -->
+          <div class="px-5 py-4 bg-paperDark/70 border-t-[3px] border-dashed border-ink flex flex-col sm:flex-row items-center justify-between gap-3">
+            <button
+              id="download-ics-btn"
+              type="button"
+              class="comic-btn w-full sm:w-auto bg-charlieYellow hover:bg-woodstockGold text-ink font-comic text-xl font-bold px-6 py-3 flex items-center justify-center gap-2.5 cursor-pointer"
+            >
+              <span class="w-6 h-6 inline-flex items-center justify-center flex-shrink-0">
+                <img
+                  src="calendar.png"
+                  alt="Calendar"
+                  class="w-full h-full object-contain"
+                />
+              </span>
+              <span>Save to Calendar (.ics)</span>
+            </button>
+
+            <span id="ics-feedback" class="font-comic text-base text-snoopyRed font-bold">
+              Ready for November 29, 2026! 🐾
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Strip -->
+    <footer class="text-center pb-4 pt-1">
+      <p class="font-comic text-base text-ink/70">
+        Made with 🐾 &amp; encouragement for <strong class="text-ink">Eiriel</strong> • November 29, 2026
+      </p>
+    </footer>
+
+  </main>
+
+  <script>
+    // ==================== INTERACTIVE RSVP & DODGE LOGIC ====================
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
+    const rsvpArena = document.getElementById('rsvp-arena');
+    const rsvpPanel = document.getElementById('rsvp-panel');
+    const celebrationPanel = document.getElementById('celebration-panel');
+    const woodstockHint = document.getElementById('woodstock-hint');
+    const snoopyFrame = document.getElementById('snoopy-frame');
+    const snoopyZzz = document.getElementById('snoopy-zzz');
+    const snoopyCelebrationOverlay = document.getElementById('snoopy-celebration-overlay');
+    const mainHeadline = document.getElementById('main-headline');
+    const subHeadline = document.getElementById('sub-headline');
+    const downloadIcsBtn = document.getElementById('download-ics-btn');
+    const icsFeedback = document.getElementById('ics-feedback');
+
+    const playfulPrompts = [
+      "Woodstock says click Yes!",
+      "Sayaw daw si Pareng Snoopy pag nag-yes ka!",
+      "NT Buseng! 🐾",
+      "Wait—kala ko mag-pictorial tayo?!",
+      "Error 404: 'No' not found in Peanuts! 🚫",
+      "Kanina pa nagaantay si Charlie Brown oh—click Yes mo na!",
+      "Isipin mo yung Food Trip natin don ya! 🍜"
+    ];
+
+    let dodgeCount = 0;
+    let yesScale = 1;
+
+    function handleNoDodge(e) {
+      if (e) e.preventDefault();
+
+      // Cycle playful Peanuts prompt on both button and Woodstock hint
+      const promptText = playfulPrompts[dodgeCount % playfulPrompts.length];
+      noBtn.textContent = promptText;
+      woodstockHint.textContent = promptText;
+      dodgeCount++;
+
+      // Gently grow the Yes button to encourage clicking it
+      yesScale = Math.min(yesScale + 0.06, 1.28);
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      // Move the No button safely within the arena bounds without overflowing screen
+      const arenaRect = rsvpArena.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      // Calculate safe random offset within arena
+      const maxOffsetX = Math.max(20, (arenaRect.width - btnRect.width) / 2 - 8);
+      const maxOffsetY = 28;
+
+      const randomX = Math.round((Math.random() * 2 - 1) * maxOffsetX);
+      const randomY = Math.round((Math.random() * 2 - 1) * maxOffsetY);
+      const randomRotate = Math.round((Math.random() * 2 - 1) * 7);
+
+      noBtn.style.transition = 'transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      noBtn.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+    }
+
+    // Trigger dodge on desktop hover and mobile tap/touch
+    noBtn.addEventListener('mouseenter', handleNoDodge);
+    noBtn.addEventListener('click', handleNoDodge);
+    noBtn.addEventListener('touchstart', handleNoDodge, { passive: false });
+
+    // ==================== CELEBRATION TRIGGER (ON YES) ====================
+    yesBtn.addEventListener('click', () => {
+      // 1. Add joyful musical notes, hearts & happy bounce to Snoopy & Woodstock photo frame
+      snoopyZzz.classList.add('hidden');
+      snoopyCelebrationOverlay.classList.remove('hidden');
+      snoopyFrame.classList.add('animate-happy-dance', 'ring-4', 'ring-charlieYellow');
+
+      // 2. Update Hero Copy to Celebrate
+      mainHeadline.innerHTML = `Woohoo! See you on <span class="text-snoopyRed underline decoration-charlieYellow decoration-4 underline-offset-4">Nov 29, Eiriel!</span>`;
+      subHeadline.textContent = "Snoopy and Woodstock are officially cheering! Get ready for the best afternoon of encouragement and Binondo favorites.";
+
+      // 3. Hide RSVP panel and reveal Confirmed Date Pass panel
+      rsvpPanel.classList.add('hidden');
+      celebrationPanel.classList.remove('hidden');
+
+      // 4. Launch Peanuts-themed Confetti!
+      launchConfetti();
+
+      // 5. Smooth scroll to the Confirmed Date Pass
+      setTimeout(() => {
+        celebrationPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 180);
+    });
+
+    // ==================== CALENDAR (.ICS) DOWNLOAD ====================
+    downloadIcsBtn.addEventListener('click', () => {
+      // Event: November 29, 2026 at 3:00 PM to 7:00 PM (Asia/Manila UTC+8)
+      // 3:00 PM PHT = 07:00:00Z, 7:00 PM PHT = 11:00:00Z
+      const icsLines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Peanuts Sunday Edition//Encouragement Date for Eiriel//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        'UID:encouragement-date-eiriel-20261129@peanuts-invite',
+        'DTSTAMP:20261114T000000Z',
+        'DTSTART:20261129T070000Z',
+        'DTEND:20261129T110000Z',
+        'SUMMARY:Encouragement Date with Eiriel 🐾🏮',
+        'LOCATION:Binondo, Manila',
+        'DESCRIPTION:E-Date sa Binondo.',
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ];
+
+      const icsContent = icsLines.join('\r\n');
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Encouragement-Date-Eiriel-Nov29-2026.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      icsFeedback.textContent = 'Downloaded! Check your calendar app';
+    });
+
+    // ==================== PEANUTS PALETTE CONFETTI ENGINE ====================
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ['#D9381E', '#F4C430', '#FFD700', '#1A1A1A', '#FFFFFF'];
+      const particles = [];
+      const particleCount = 135;
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          w: Math.random() * 11 + 6,
+          h: Math.random() * 7 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 4,
+          vy: Math.random() * 3.5 + 2.5,
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 9,
+        });
+      }
+
+      let frame = 0;
+      const maxFrames = 240;
+
+      function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        frame++;
+
+        particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rotation += p.vRot;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.strokeStyle = '#1A1A1A';
+          ctx.lineWidth = 1.2;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.strokeRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+
+        if (frame < maxFrames) {
+          requestAnimationFrame(animateConfetti);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      animateConfetti();
+    }
+
+    // Keep confetti canvas responsive on resize
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('confetti-canvas');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
